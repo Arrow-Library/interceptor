@@ -1,0 +1,40 @@
+buildscript {
+    ext.kotlin_version = '1.5.0'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+group = "com.arrow.next.interceptor"
+version = '1.0.0'
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://repository.jetbrains.com/repo'
+    }
+}
+
+dependencies {
+    implementation "io.insert-koin:koin-core:3.0.2"
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+}
